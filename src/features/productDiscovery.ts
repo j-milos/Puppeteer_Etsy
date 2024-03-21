@@ -1,10 +1,9 @@
 import { Page } from "puppeteer";
 import { ProductType } from "../types";
 
-const PRODUCT_DICOVERY_URL = "https://www.etsy.com/c/clothing";
-
 export const productDiscovery = async (page: Page) => {
-  await page.goto(PRODUCT_DICOVERY_URL);
+  const productDiscoveryUrl = "https://www.etsy.com/c/clothing";
+  await page.goto(productDiscoveryUrl);
 
   const productsData = await page.evaluate(() => {
     const productList = Array.from(
