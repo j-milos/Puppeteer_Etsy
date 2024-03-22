@@ -55,6 +55,31 @@ const main = async () => {
     // Checkout
     const cartUrl = "https://www.etsy.com/cart";
     await page.goto(cartUrl);
+    await delay(500);
+    await page.click('.multi-shop-cart-payment [type="submit"]');
+    await delay(500);
+    //Continue as guest
+    await page.click("#join-neu-continue-as-guest button");
+    // Wait for page to fully load to make sure buy product action is finished
+    await page.waitForNavigation();
+    //Email
+    await page.focus("#shipping-form-email-input");
+    await page.keyboard.type("pera@mailinator.com");
+    //Confirm email
+    await page.focus("#shipping-form-email-confirmation");
+    await page.keyboard.type("pera@mailinator.com");
+    //Full name
+    await page.focus('#name11 [type="text"]');
+    await page.keyboard.type("Pera Petrovic");
+    //Street address
+    await page.focus('#first_line12 [type="text"]');
+    await page.keyboard.type("Pera's street");
+    //City
+    await page.focus('#city15 [type="text"]');
+    await page.keyboard.type("Pera town");
+    //Continue to payment
+    await delay(1000);
+    await page.click(".wt-btn.wt-btn--filled.wt-width-full");
     // await featureFourFunction();
     // await browser.close();
   } catch (error) {
