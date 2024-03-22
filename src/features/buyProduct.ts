@@ -1,9 +1,10 @@
 import { Page } from "puppeteer";
-import { delay } from "../helpers";
+import { delay } from "../helpers/delay";
 
 export const buyProduct = async (page: Page) => {
+  //The product URL is hardcoded to display the checkout process because not every product has the option to pay with a card (only PayPal payment is available).
   const productToBuyURL =
-    "https://www.etsy.com/listing/1698835601/formula-f1-jacket-formula-f1-retro?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=&ref=sr_gallery-1-1&pro=1&frs=1&content_source=be30bcac4c4c84d39dbbc59abd00caa311843224%253A1698835601&organic_search_click=1";
+    "https://www.etsy.com/listing/1574120506/indian-handmade-patch-work-vintage?ga_order=most_relevant&ga_search_type=all&ga_view_type=gallery&ga_search_query=&ref=sr_gallery-1-15&pro=1&frs=1&content_source=ba78845181a26881cc4a66b17079edd74f261ac2%253A1574120506&organic_search_click=1";
 
   await page.goto(productToBuyURL);
 

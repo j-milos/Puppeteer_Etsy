@@ -1,5 +1,9 @@
 import { Page } from "puppeteer";
-import { ProductDetailsType, ProductType } from "../types";
+import {
+  ProductDetailsType,
+  ProductDetailsVariation,
+  ProductType,
+} from "../types";
 
 export const productDetailsExtraction = async (
   page: Page,
@@ -45,13 +49,33 @@ export const productDetailsExtraction = async (
           "#wt-content-toggle-product-details-read-more p"
         )?.innerText ?? "";
 
-      const availableSizes = Array.from(
-        document.querySelectorAll<HTMLElement>("#variation-selector-0 option")
+      const selectVariationElements = Array.from(
+        document.querySelectorAll<HTMLSelectElement>(
+          "[id^='variation-selector']"
+        )
       );
 
-      const formattedSizes = availableSizes.map((size) => {
-        return size?.innerHTML?.trim() ?? "";
-      });
+      const variations: ProductDetailsVariation[] = selectVariationElements.map(
+        (element) => {
+          const labelName = document
+            .querySelector<HTMLLabelElement>(`label[for="${element.id}"]`)
+            ?.innerText?.trim();
+
+          const selectOptions = Array.from(
+            element.querySelectorAll<HTMLOptionElement>("option")
+          ).map((e) => {
+            return {
+              optionName: e?.text?.trim(),
+              optionValue: e?.value,
+            };
+          });
+
+          return {
+            labelName,
+            selectOptions,
+          };
+        }
+      );
 
       const imageURL = document
         .querySelector<HTMLElement>(".image-carousel-container img")
@@ -61,7 +85,7 @@ export const productDetailsExtraction = async (
         title,
         price,
         description,
-        sizes: formattedSizes,
+        variations,
         imageURL,
       };
     });

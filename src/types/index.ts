@@ -8,6 +8,14 @@ export type ProductDetailsType = {
   title: string;
   price: string;
   description: string;
-  sizes: string[];
+  variations: ProductDetailsVariation[];
   imageURL: string;
+};
+
+export type ProductDetailsVariation = {
+  labelName: string;
+  selectOptions: {
+    optionName: string;
+    optionValue: string;
+  }[];
 };
