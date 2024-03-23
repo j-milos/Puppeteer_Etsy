@@ -23,16 +23,12 @@ export const checkout = async (page: Page) => {
   await page.type("#shipping-form-email-confirmation", "pera@mailinator.com");
   // Full name
   await page.type('#name11 [type="text"]', "Pera Petrovic");
-  // await page.focus('#name11 [type="text"]');
-  // await page.keyboard.type("Pera Petrovic");
+
   // Street address
   await page.type('#first_line12 [type="text"]', "Pera's street");
-  // await page.focus('#first_line12 [type="text"]');
-  // await page.keyboard.type("Pera's street");
+
   // City
   await page.type('#city15 [type="text"]', "Pera town");
-  // await page.focus('#city15 [type="text"]');
-  // await page.keyboard.type("Pera town");
 
   // Continue to payment
   await page.click(".wt-btn.wt-btn--filled.wt-width-full");
